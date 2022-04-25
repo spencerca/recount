@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+namespace Group_Assignment_4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //We need to establish variables and array's to store vote information
+            string vote = "";
+            int highestvote = 0;
+            string winner = "";
+            IDictionary<string, int> candidatevotelist = new Dictionary<string, int>();
+
+            //Count up the vote input until the input ends
+            while (vote != "***")
+            {
+                vote = Console.ReadLine();
+                //Adds a name to the list if not already present, if already present +1 for the votes
+                if (!candidatevotelist.ContainsKey(vote))
+                {
+                    candidatevotelist.Add(vote, 1);
+                }
+                else
+            {
+                candidatevotelist[vote]++;
+            }
+        }
+
+            //Compares each candidate in array to the highest vote; if highest vote print that candidate as a winner, if two or more candidates = highestvote, then print "Runoff!"
+            foreach (string candidatename in candidatevotelist.Keys)
+            {
+                if (candidatevotelist[candidatename] > highestvote)
+                {
+                    winner = candidatename;
+                    highestvote = candidatevotelist[candidatename];
+                }
+                else if (candidatevotelist[candidatename] == highestvote)
+        {
+            winner = "Runoff!";
+        }
+    }
+    Console.WriteLine(winner);
+        }
+    }
+}
